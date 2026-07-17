@@ -14,7 +14,14 @@ jarки кидаются в ./jars/
 Всё автоматом пушится через Github Pages
 
 Пользуйтесь, а я пойду ромашковый чай пить и спать наконец..
+
+P.S: Посмотреть весь этот шедевр можно по ссылке, которая прям под текстом.
+https://github.com/DestroyTokyo/DestroyTokyo.github.io/tree/repo
 ```
+
+<p align="center" >
+    <a href="https://github.com/DestroyTokyo/DestroyTokyo.github.io/tree/repo" target="_blank">Та самая ссылка</a>
+</p>
 
 ---
 
