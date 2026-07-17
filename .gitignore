@@ -1,0 +1,12 @@
+# ==================== #
+# By: Lmao stupid Cion #
+# ==================== #
+
+# <= Main =>
+.env
+.zed
+.idea
+
+# <= Util =>
+jars
+tekila.txt

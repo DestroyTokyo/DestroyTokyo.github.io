@@ -1,0 +1,34 @@
+name: Publish Maven Repo
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'jars/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Generate Maven repo
+        run: python generate_data.py
+
+      - name: Deploy to gh-pages branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: maven-repo
+          target-folder: maven-repo
+          clean: true
