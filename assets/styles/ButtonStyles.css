@@ -1,0 +1,56 @@
+@import "colors.css";
+
+.url-block a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 6px 14px;
+    border-radius: 0px;
+    text-decoration: none;
+    font-size: large;
+    transition: .25s;
+}
+
+.url-block a[href*="youtube.com"] {
+    color: var(--youtube-color);
+    border: 2px solid var(--youtube-color);
+}
+
+.url-block a[href*="youtube.com"]:hover {
+    background: var(--youtube-color);
+}
+
+.url-block a[href*="github.com"] {
+    color: var(--github-color);
+    border: 2px solid var(--github-color);
+}
+
+.url-block a[href*="github.com"]:hover {
+    background: var(--github-color);
+}
+
+.url-block a[href*="discord.gg"] {
+    color: var(--discord-color);
+    border: 2px solid var(--discord-color);
+}
+
+.url-block a[href*="discord.gg"]:hover {
+    background: var(--discord-color);
+}
+
+.url-block a[href*="t.me"] {
+    color: var(--telegram-color);
+    border: 2px solid var(--telegram-color);
+}
+
+.url-block a[href*="t.me"]:hover {
+    background: var(--telegram-color);
+}
+
+.url-block a[href*="soundcloud.com"] {
+    color: var(--soundcloud-color);
+    border: 2px solid var(--soundcloud-color);
+}
+
+.url-block a[href*="soundcloud.com"]:hover {
+    background: var(--soundcloud-color);
+}
