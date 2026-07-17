@@ -3,8 +3,6 @@ name: Publish Maven Repo
 on:
   push:
     branches: [ "main" ]
-    paths:
-      - 'jars/**'
   workflow_dispatch:
 
 permissions:
@@ -46,7 +44,9 @@ jobs:
     
           cp -r ../maven-repo-temp/* .
     
-          cp -r site/* . 2>/dev/null || true
+          cp -r site/. .
+          ls -la .
+          ls -la ./assets/
     
           touch .nojekyll
     
