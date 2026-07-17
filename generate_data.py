@@ -43,7 +43,7 @@ def process_jar(jar_path):
 
     artifact = "tokyo"
 
-    target_dir = OUTPUT_DIR / GROUP_ID.replace(".", "/") / artifact / f"v{version}"
+    target_dir = OUTPUT_DIR / GROUP_ID.replace(".", "/") / artifact / version
 
     target_dir.mkdir(parents=True, exist_ok=True)
 
