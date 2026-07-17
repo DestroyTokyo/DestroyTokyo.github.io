@@ -16,6 +16,7 @@
 
     <!-- For docs only -->
     <link rel="stylesheet" href="assets/styles/doc/rootdoc.css" type="text/css">
+    <link rel="stylesheet" href="assets/styles/doc/code.css" type="text/css">
 
     <!-- Themes -->
     <script type="module" src="assets/js/theme.js"></script>
@@ -39,6 +40,23 @@
             <li>Tokyo Maven Repo</li>
             <li>https://destroytokyo.github.io/delta/cion/tokyo/v{version}/tokyo-{version}.jar</li>
         </ul>
+
+        
+        <div class="codeblock">
+                <code>
+                    repositories {
+                        mavenCentral()
+                        maven {
+                            url "https://destroytokyo.github.io/"
+                        }
+                    }
+
+                    dependencies {
+                        compileOnly("delta.cion:tokyo:{version}")
+                    }
+                </code>
+        </div>
+
 
         <footer>
             <p>Пока это просто заглушка для теста</p>
