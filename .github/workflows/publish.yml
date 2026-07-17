@@ -25,10 +25,10 @@ jobs:
       - name: Generate Maven repo
         run: python generate_data.py
 
-      - name: Deploy to gh-pages branch
+      - name: Deploy to repo branch
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages
+          branch: repo
           folder: maven-repo
           target-folder: maven-repo
           clean: true
