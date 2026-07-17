@@ -25,10 +25,23 @@ jobs:
       - name: Generate Maven repo
         run: python generate_data.py
 
-      - name: Deploy to repo branch
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: repo
-          folder: maven-repo
-          target-folder: maven-repo
-          clean: true
+      - name: Deploy to repo branch (manual)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+    
+          if git ls-remote --heads origin repo | grep -q repo; then
+            git fetch origin repo
+            git checkout repo
+          else
+            git checkout --orphan repo
+          fi
+    
+          git rm -rf .
+    
+          cp -r maven-repo/* .
+    
+          git add .
+          git commit -m "Deploy Maven repo $(date)"
+    
+          git push origin repo --force
