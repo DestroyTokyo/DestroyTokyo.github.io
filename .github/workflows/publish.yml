@@ -3,6 +3,9 @@ name: Publish Maven Repo
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'jars/**'
+      - 'site/**'
   workflow_dispatch:
 
 permissions:
