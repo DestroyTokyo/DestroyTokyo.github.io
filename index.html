@@ -29,37 +29,50 @@
 <body class="main-div">
 
     <div class="terminal">
-        <div class="http-headers">
-            <img id="theme-button" class="profile-avatar" src="assets/screens/avatar.png" alt="avatar">
-            Nionim/TokyoMavenRepo
+
+        <h1 id="theme-button">Tokyo project</h1>
+
+        <p>
+            Это простое Minecraft ядро, базируемое на Minestom.
+            <br> Основная информация:
+            <ul>
+                <li>MC: 1.21.4</li>
+                <li>Gradle: 9</li>
+                <li>Minestom: fb895cb899</li>
+            </ul>
+        </p>
+        
+        <div class="codeblock">
+                <code>
+                    // Add the tokyo repo:
+                    repositories {
+                    	mavenCentral()
+                        // Mirror if domain not exists:
+                        //     https://destroytokyo.github.io/
+                    	maven("https://tokyo.citory.net/")
+                    }
+                </code>
         </div>
-
-        <h1>TEST ONLY</h1>
-
-        <ul>
-            <li>Tokyo Maven Repo</li>
-            <li>https://destroytokyo.github.io/delta/cion/tokyo/v{version}/tokyo-{version}.jar</li>
-        </ul>
 
         
         <div class="codeblock">
                 <code>
-                    repositories {
-                        mavenCentral()
-                        maven {
-                            url "https://destroytokyo.github.io/"
-                        }
-                    }
-
+                    // Set tokyo depend
                     dependencies {
-                        compileOnly("delta.cion:tokyo:{version}")
+                    	// example:   delta.cion:tokyo:2.2.0-predemo
+                    	// its old version   ->  cherry:
+                        //                              2.1.0-predemo
+                        //                              2.0.0-predemo
+                        //                              1.0.0-predemo
+                    	// its first version ->  tokyo-msnt:0.0.0
+                    	compileOnly("delta.cion:tokyo:{version}")
                     }
                 </code>
         </div>
 
 
         <footer>
-            <p>Пока это просто заглушка для теста</p>
+            <p>Пока это просто заглушка сайта для теста</p>
         </footer>
     </div>
 
