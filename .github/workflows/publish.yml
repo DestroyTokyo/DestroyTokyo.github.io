@@ -39,6 +39,9 @@ jobs:
         run: |
           python download_jars.py
           ls -R
+          
+          python generate_data.py
+          ls -R
 
 #      - name: Deploy to repo branch
 #        run: |
