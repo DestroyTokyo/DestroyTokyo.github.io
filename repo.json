@@ -3,15 +3,15 @@
         "cion": {
            "tokyo": {
                 "url": "https://github.com/DestroyTokyo/Tokyo/releases",
-                "pattern": [".jar", "API"]
+                "pattern": [".jar", "Tokyo", "API"]
+            },
+           "cherry": {
+                "url": "https://github.com/DestroyTokyo/Tokyo/releases",
+                "pattern": [".jar", "Cherry", "API"]
             },
            "tokyo-msnt": {
                 "url": "https://github.com/DestroyTokyo/Tokyo/releases",
                 "pattern": [".jar", "MSNT"]
-            },
-           "cherry": {
-                "url": "https://github.com/DestroyTokyo/Tokyo/releases",
-                "pattern": [".jar", "Cherry"]
             },
             "debukkit": {
                 "url": "https://github.com/DestroyTokyo/DeBukkit/releases",
