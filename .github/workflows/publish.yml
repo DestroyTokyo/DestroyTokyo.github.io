@@ -1,4 +1,4 @@
-name: Publish Maven Repo
+name: Build This Sh11111
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
       - 'jars/**'
       - 'site/**'
       - 'generate_data.py'
+      - 'download_jars.py'
   workflow_dispatch:
 
 permissions:
@@ -19,21 +20,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: Generate Maven repo
-        run: python generate_data.py
+      - name: Install requests
+        run: pip install requests
 
       - name: Generate assets
         run: python .root/generate_site_assets.py
 
-      - name: Install requests
-        run: pip install requests
-
-      - name: Download all releases
+      - name: Download releases
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -43,29 +41,29 @@ jobs:
           python generate_data.py
           ls -R
 
-#      - name: Deploy to repo branch
-#        run: |
-#          git config user.name "github-actions[bot]"
-#          git config user.email "github-actions[bot]@users.noreply.github.com"
-#   
-#          mv maven-repo ../maven-repo-temp
-#          mv site ../site-temp
-#    
-#          if git ls-remote --heads origin repo | grep -q repo; then
-#            git fetch origin repo
-#            git checkout -f repo
-#          else
-#            git checkout --orphan repo
-#          fi
-#    
-#          git rm -rf . 2>/dev/null || true
-#    
-#          cp -r ../maven-repo-temp/* .
-#          cp -r ../site-temp/. .
-#          touch .nojekyll
-#          
-#          rm -rf ../maven-repo-temp ../site-temp
-#    
-#          git add .
-#          git commit -m "Deploy Maven repo and site $(date)"
-#          git push origin repo --force
+      - name: Deploy (into "repo")
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+   
+          mv maven-repo ../maven-repo-temp
+          mv site ../site-temp
+    
+          if git ls-remote --heads origin repo | grep -q repo; then
+            git fetch origin repo
+            git checkout -f repo
+          else
+            git checkout --orphan repo
+          fi
+    
+          git rm -rf . 2>/dev/null || true
+    
+          cp -r ../maven-repo-temp/* .
+          cp -r ../site-temp/. .
+          touch .nojekyll
+          
+          rm -rf ../maven-repo-temp ../site-temp
+    
+          git add .
+          git commit -m "Deploy by $(date)"
+          git push origin repo --force

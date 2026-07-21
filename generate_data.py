@@ -1,6 +1,4 @@
-import re
-import hashlib
-import shutil
+import re, hashlib, shutil
 from pathlib import Path
 
 JARS_ROOT = Path("./jars")
@@ -63,22 +61,25 @@ def process_jar(jar_path, group_id, artifact_id):
             sha_path = f.with_suffix(f.suffix + ".sha1")
             with open(sha_path, "w") as sf:
                 sf.write(sha)
-        print(f"+ {group_id}:{artifact}:{version}")
     else:
         sha = sha1_file(target_jar)
         sha_path = target_jar.with_suffix(target_jar.suffix + ".sha1")
         with open(sha_path, "w") as sf:
             sf.write(sha)
-            
+
 def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    if not JARS_ROOT.exists(): return
+    if not JARS_ROOT.exists():
+        return
+
     for jar_path in JARS_ROOT.rglob("*.jar"):
         rel_path = jar_path.relative_to(JARS_ROOT)
         parts = rel_path.parts
-        if len(parts) < 2: continue
-        group_path = "/".join(parts[:-1])
-        artifact = parts[-2] if len(parts) >= 2 else parts[0]
+        if len(parts) < 3:
+            continue
+
+        group_path = "/".join(parts[:-2])
+        artifact = parts[-2]
         group_id = group_path.replace("/", ".")
         process_jar(jar_path, group_id, artifact)
 
