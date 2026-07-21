@@ -8,6 +8,7 @@ on:
       - 'site/**'
       - 'generate_data.py'
       - 'download_jars.py'
+      - 'repo.json'
   workflow_dispatch:
 
 permissions:

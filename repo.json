@@ -5,6 +5,10 @@
                 "url": "https://github.com/DestroyTokyo/Tokyo/releases",
                 "pattern": [".jar", "API"]
             },
+           "tokyo-msnt": {
+                "url": "https://github.com/DestroyTokyo/Tokyo/releases",
+                "pattern": [".jar", "MSNT"]
+            },
             "debukkit": {
                 "url": "https://github.com/DestroyTokyo/DeBukkit/releases",
                 "pattern": [".jar"]
