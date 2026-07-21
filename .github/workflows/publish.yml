@@ -58,6 +58,7 @@ jobs:
           fi
     
           git rm -rf . 2>/dev/null || true
+          rm -rf jars
     
           cp -r ../maven-repo-temp/* .
           cp -r ../site-temp/. .
