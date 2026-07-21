@@ -22,6 +22,10 @@ def process_repo(repo_path, patterns):
         resp = session.get(RELEASES_URL.format(repo_path, page))
         resp.raise_for_status()
         releases = resp.json()
+
+        if resp.status_code != 200:
+            print(f"{repo_path} error: {resp.status_code}.")
+            return
         if not releases: break
         for release in releases:
             for asset in release.get("assets", []):
