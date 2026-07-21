@@ -30,6 +30,9 @@ jobs:
       - name: Generate assets
         run: python .root/generate_site_assets.py
 
+      - name: Install requests
+        run: pip install requests
+
       - name: Download all releases
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
