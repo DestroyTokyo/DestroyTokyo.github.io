@@ -1,6 +1,5 @@
 .codeblock {
-    position: block;
-    background: #1e1e2e;        /* тёмный фон, можно поменять */
+    position: relative;
     border-radius: 8px;
     padding: 6px 0px;
     margin: 6px 0;
@@ -13,6 +12,7 @@
 }
 
 .codeblock code {
+    background: #1e1e2e;
     display: block;
     white-space: pre;
 }
