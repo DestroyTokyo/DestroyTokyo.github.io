@@ -1,0 +1,20 @@
+{
+    "delta": {
+        "cion": {
+           "tokyo": {
+                "url": "https://github.com/DestroyTokyo/Tokyo/releases",
+                "pattern": [".jar", "API"]
+            },
+            "debukkit": {
+                "url": "https://github.com/DestroyTokyo/DeBukkit/releases",
+                "pattern": [".jar"]
+            }
+        }
+    },
+    "net": {
+        "minestom": {
+            "url": "https://github.com/DestroyTokyo/MinestomBackport/releases",
+            "pattern": [".jar"]
+        }
+    }
+}

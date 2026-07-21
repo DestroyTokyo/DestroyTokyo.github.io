@@ -30,29 +30,36 @@ jobs:
       - name: Generate assets
         run: python .root/generate_site_assets.py
 
-      - name: Deploy to repo branch
+      - name: Download all releases
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-    
-          mv maven-repo ../maven-repo-temp
-          mv site ../site-temp
-    
-          if git ls-remote --heads origin repo | grep -q repo; then
-            git fetch origin repo
-            git checkout -f repo
-          else
-            git checkout --orphan repo
-          fi
-    
-          git rm -rf . 2>/dev/null || true
-    
-          cp -r ../maven-repo-temp/* .
-          cp -r ../site-temp/. .
-          touch .nojekyll
-          
-          rm -rf ../maven-repo-temp ../site-temp
-    
-          git add .
-          git commit -m "Deploy Maven repo and site $(date)"
-          git push origin repo --force
+          python download_jars.py
+          ls -R
+
+#      - name: Deploy to repo branch
+#        run: |
+#          git config user.name "github-actions[bot]"
+#          git config user.email "github-actions[bot]@users.noreply.github.com"
+#   
+#          mv maven-repo ../maven-repo-temp
+#          mv site ../site-temp
+#    
+#          if git ls-remote --heads origin repo | grep -q repo; then
+#            git fetch origin repo
+#            git checkout -f repo
+#          else
+#            git checkout --orphan repo
+#          fi
+#    
+#          git rm -rf . 2>/dev/null || true
+#    
+#          cp -r ../maven-repo-temp/* .
+#          cp -r ../site-temp/. .
+#          touch .nojekyll
+#          
+#          rm -rf ../maven-repo-temp ../site-temp
+#    
+#          git add .
+#          git commit -m "Deploy Maven repo and site $(date)"
+#          git push origin repo --force
