@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-import json
-import re
-import os
-import requests
+import json, re, os, requests
 from os import environ
 
 GH_TOKEN = environ.get("GITHUB_TOKEN")
@@ -55,7 +52,6 @@ def traverse(obj, path=None):
             artifact = path[-1]
             m = re.match(r"https://github\.com/([^/]+/[^/]+)/releases", obj["url"])
             if m: process_repo(m.group(1), obj["pattern"], group_path, artifact)
-            else: print(f"Не удалось извлечь репозиторий из URL: {obj['url']}")
         else:
             for k, v in obj.items():
                 traverse(v, path + [k])
@@ -72,8 +68,7 @@ def set_session():
     })
 
 def main():
-    if not GH_TOKEN:
-        raise ValueError("GITHUB_TOKEN не задан в переменных окружения.")
+    if not GH_TOKEN: raise ValueError("GITHUB_TOKEN is empty")
     set_session()
     with open(FILE_NAME) as f:
         data = json.load(f)
