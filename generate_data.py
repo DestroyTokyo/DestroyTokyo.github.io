@@ -1,8 +1,9 @@
-import re, hashlib, shutil
+import re
+import hashlib
+import shutil
 from pathlib import Path
 
-GROUP_ID = "delta.cion"
-SOURCE_DIR = Path("./jars")
+JARS_ROOT = Path("./jars")
 OUTPUT_DIR = Path("./maven-repo")
 
 POM_TEMPLATE = """<?xml version="1.0" encoding="UTF-8"?>
@@ -22,7 +23,7 @@ def sha1_file(filepath):
     with open(filepath, "rb") as f:
         return hashlib.sha1(f.read()).hexdigest()
 
-def process_jar(jar_path):
+def process_jar(jar_path, group_id, artifact_id):
     filename = jar_path.name
     base = filename[:-4]
 
@@ -34,27 +35,22 @@ def process_jar(jar_path):
             break
 
     match = re.search(r"-v(.+)$", base)
-    if match:
-        version = match.group(1)
-        artifact = base[:match.start()]
-    else:
-        version = "0.0.0"
-        artifact = base
+    if match: version = match.group(1)
+    else: version = "0.0.0"
 
-    artifact = "tokyo"
+    artifact = artifact_id
 
-    target_dir = OUTPUT_DIR / GROUP_ID.replace(".", "/") / artifact / version
-
+    group_path = group_id.replace(".", "/")
+    target_dir = OUTPUT_DIR / group_path / artifact / version
     target_dir.mkdir(parents=True, exist_ok=True)
 
     base_name = f"{artifact}-{version}"
     target_jar = target_dir / f"{base_name}{classifier}.jar"
-
     shutil.copy2(jar_path, target_jar)
 
     if not classifier:
         pom_content = POM_TEMPLATE.format(
-            group_id=GROUP_ID,
+            group_id=group_id,
             artifact_id=artifact,
             version=version
         )
@@ -67,19 +63,24 @@ def process_jar(jar_path):
             sha_path = f.with_suffix(f.suffix + ".sha1")
             with open(sha_path, "w") as sf:
                 sf.write(sha)
-
-        print(f"Sucess: {artifact}:{version}")
+        print(f"+ {group_id}:{artifact}:{version}")
     else:
         sha = sha1_file(target_jar)
         sha_path = target_jar.with_suffix(target_jar.suffix + ".sha1")
         with open(sha_path, "w") as sf:
             sf.write(sha)
-        print(f"Sucess: {classifier} for {artifact}:{version}")
-
+            
 def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    for jar in SOURCE_DIR.glob("*.jar"):
-        process_jar(jar)
-        
+    if not JARS_ROOT.exists(): return
+    for jar_path in JARS_ROOT.rglob("*.jar"):
+        rel_path = jar_path.relative_to(JARS_ROOT)
+        parts = rel_path.parts
+        if len(parts) < 2: continue
+        group_path = "/".join(parts[:-1])
+        artifact = parts[-2] if len(parts) >= 2 else parts[0]
+        group_id = group_path.replace("/", ".")
+        process_jar(jar_path, group_id, artifact)
+
 if __name__ == "__main__":
     main()
