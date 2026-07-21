@@ -3,7 +3,7 @@ import json, re, requests
 from os import environ
 
 GH_TOKEN = environ.get("GITHUB_TOKEN")
-RELEASES_URL = "https://api.github.com/repos/{repo_path}/releases?per_page=100&page={page}"
+RELEASES_URL = "https://api.github.com/repos/{}/releases?per_page=100&page={}"
 
 FILE_NAME = "repo.json"
 
@@ -48,6 +48,7 @@ def main():
         traverse(json.load(f))
 
 def setSession():
+    global session
     session = requests.Session()
     session.headers.update({
         "Authorization": f"token {GH_TOKEN}",
