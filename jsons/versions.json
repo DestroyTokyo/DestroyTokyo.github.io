@@ -1,1 +1,21 @@
-{}
+{
+  "delta/cion/tokyo/tokyo": [
+    "TokyoAPI-v2.2.0-predemo.jar",
+    "TokyoAPI-v2.2.0-predemo-sources.jar",
+    "TokyoAPI-v2.2.0-predemo-javadoc.jar"
+  ],
+  "delta/cion/tokyo/tokyo-cherry": [
+    "CherryAPI-v1.0.0-predemo-javadoc.jar",
+    "CherryAPI-v1.0.0-predemo.jar",
+    "CherryAPI-v2.0.0-predemo-sources.jar",
+    "CherryAPI-v2.1.0-predemo.jar",
+    "CherryAPI-v2.0.0-predemo.jar",
+    "CherryAPI-v2.1.0-predemo-sources.jar",
+    "CherryAPI-v1.0.0-predemo-sources.jar",
+    "CherryAPI-v2.0.0-predemo-javadoc.jar",
+    "CherryAPI-v2.1.0-predemo-javadoc.jar"
+  ],
+  "delta/cion/tokyo/tokyo-msnt": [
+    "MSNT.jar"
+  ]
+}
