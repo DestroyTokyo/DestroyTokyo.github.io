@@ -35,7 +35,7 @@ repositories {
 	maven("https://tokyo.citory.net/")
 }
 
-// see versions on: https://destroytokyo.github.io/jsons/versions.json
+// see versions on: https://tokyo.citory.net/jsons/versions.json
 dependencies {
 	// example:   delta.cion.tokyo:tokyo:2.2.0-predemo
 	// its old version   ->  tokyo-cherry:
@@ -48,7 +48,7 @@ dependencies {
 ```
 
 <p align="center" >
-    <a href="https://destroytokyo.github.io/jsons/versions.json" target="_blank">Maven Content & Build Versions</a>
+    <a href="https://tokyo.citory.net/jsons/versions.json" target="_blank">Maven Content & Build Versions</a>
 </p>
 
 ---
