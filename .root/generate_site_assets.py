@@ -48,9 +48,9 @@ def get_pathes():
         data = json.load(f)
         collect_paths(data, [], pathes)
     for path in pathes:
-        print(f"Checking versions for ./{path}")
-        if os.path.exists(path):
-            versions[path] = get_versions(path)
+        print(f"Checking versions for ./maven-repo/{path}")
+        if os.path.exists(f"./maven-repo/{path}"):
+            versions[path] = get_versions(f"./maven-repo/{path}")
         else: print("Not found")
     print(versions)
     return versions
@@ -67,7 +67,10 @@ def collect_paths(data, current_path, result):
 
 def get_versions(path):
     if os.path.isdir(path):
-        return os.listdir(path)
+        list = []
+        for d in os.listdir(path):
+            if os.path.isdir(d): list.append(d)
+        return list
 
 # Main
 
