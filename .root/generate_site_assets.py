@@ -72,8 +72,8 @@ def get_versions(path):
 # Main
 
 if __name__ == "__main__":
-    # For versions on page
-    generate_versions()
     # For themes
     generate_backgrounds()
     generate_themes()
+    # For versions on page
+    generate_versions()
