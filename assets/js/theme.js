@@ -15,52 +15,53 @@ function getCookie(name) {
     return match ? match[2] : null;
 }
 
-async function loadAll() {
-    const themesResponse = await fetch('/jsons/themes.json');
+function getRootPath() {
+    const path = window.location.pathname;
+    const parts = path.replace(/^\/|\/$/g, '').split('/');
+    if (parts.length > 0 && parts[parts.length - 1].includes('.')) parts.pop();
+    const depth = parts.length;
+    return depth === 0 ? '' : '../'.repeat(depth);
+}
+
+async function loadAll(rootPath) {
+    const themesResponse = await fetch(rootPath + 'jsons/themes.json');
     themes = await themesResponse.json();
-    
-    const backgroundsResponse = await fetch('/jsons/backgrounds.json');
+    const backgroundsResponse = await fetch(rootPath + 'jsons/backgrounds.json');
     backgrounds = await backgroundsResponse.json();
 }
 
-function applyTheme(themeID) {
+function applyTheme(themeID, rootPath) {
     const theme = themes[themeID];
     if (!theme) return;
-
     const link = document.getElementById(theme_name);
     if (!link) return;
-
-    let currentHref = link.href;
-    let match = currentHref.match(/^(.*?)(?:styles\/|assets\/themes\/)[^\/]+$/);
-    if (match) link.href = match[1] + 'assets/themes/' + theme;
-    else {
-        let basePath = currentHref.substring(0, currentHref.lastIndexOf('/') + 1);
-        link.href = basePath + theme;
-    }
+    link.href = rootPath + 'assets/themes/' + theme;
 }
 
-function changeTheme() {
-    console.log("1");
+function changeTheme(rootPath) {
     let currentThemeID = parseInt(getCookie('theme'), 10);
     if (isNaN(currentThemeID)) currentThemeID = 0;
     let nextThemeID = currentThemeID + 1;
     if (nextThemeID >= themes.length) nextThemeID = 0;
-    applyTheme(nextThemeID);
+    applyTheme(nextThemeID, rootPath);
     setCookie(nextThemeID);
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
-    await loadAll();
+    const rootPath = getRootPath();
+    const link = document.getElementById(theme_name);
     
+    if (link) link.href = rootPath + 'assets/styles/root.css';
+
+    await loadAll(rootPath);
+
     let themeID = getCookie('theme');
     if (themeID === null) {
         themeID = 0;
         setCookie(themeID);
-    } else {
-        themeID = parseInt(themeID, 10);
-    }
-    applyTheme(themeID);
-    
+    } else themeID = parseInt(themeID, 10);
+
+    applyTheme(themeID, rootPath);
     const button = document.getElementById('theme-button');
-    if (button) button.onclick = changeTheme;
+    if (button) button.onclick = () => changeTheme(rootPath);
 });
