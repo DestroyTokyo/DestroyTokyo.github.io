@@ -36,13 +36,13 @@ repositories {
 }
 
 dependencies {
-	// example:   delta.cion:tokyo:2.2.0-predemo
-	// its old version   ->  cherry:
+	// example:   delta.cion.tokyo:tokyo:2.2.0-predemo
+	// its old version   ->  tokyo-cherry:
     //                              2.1.0-predemo
     //                              2.0.0-predemo
     //                              1.0.0-predemo
 	// its first version ->  tokyo-msnt:0.0.0
-	compileOnly("delta.cion:tokyo:{version}")
+	compileOnly("delta.cion.tokyo:tokyo:{version}")
 }
 ```
 
