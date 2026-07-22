@@ -69,7 +69,8 @@ def get_versions(path):
     if os.path.isdir(path):
         list = []
         for d in os.listdir(path):
-            if os.path.isdir(d): list.append(d)
+            if os.path.isdir(os.path.join(path, d)): 
+                list.append(d)
         return list
 
 # Main
