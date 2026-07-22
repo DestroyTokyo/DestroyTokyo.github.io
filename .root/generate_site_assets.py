@@ -48,9 +48,9 @@ def get_pathes():
         data = json.load(f)
         collect_paths(data, [], pathes)
     for path in pathes:
-        print(f"Checking versions for ../{path}")
-        if os.path.exists(path):
-            versions[path] = get_versions(path)
+        print(f"Checking versions for ./jars/{path}")
+        if os.path.exists(f"./jars/{path}"):
+            versions[path] = get_versions(f"./jars/{path}")
         else: print("Not found")
     print(versions)
     return versions
