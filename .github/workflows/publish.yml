@@ -10,6 +10,7 @@ on:
       - 'generate_data.py'
       - 'download_jars.py'
       - '.root/generate_site_assets.py'
+      - '.github/workflows/publish.yml'
   workflow_dispatch:
 
 permissions:
@@ -41,7 +42,9 @@ jobs:
           ls -R
 
       - name: Generate assets
-        run: python .root/generate_site_assets.py
+        run: |
+          python .root/generate_site_assets.py
+          ls -R
 
       - name: Deploy (into "repo")
         run: |
